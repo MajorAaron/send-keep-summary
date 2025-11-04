@@ -38,6 +38,15 @@ This skill collects data from Google Tasks and Google Keep, then sends a beautif
 
 1. Use `mcp__keep-mcp__find` to retrieve all notes
 2. Organize notes by categories if possible (extract from titles or labels)
+3. Extract and process media from notes:
+   - Look for YouTube URLs in note content (youtube.com or youtu.be links)
+   - Extract video IDs from YouTube URLs
+   - Generate thumbnail URLs using format: `https://img.youtube.com/vi/{VIDEO_ID}/maxresdefault.jpg`
+   - Extract any image URLs or attachments from notes
+   - Preserve links and titles associated with media
+4. Separate recipe-related notes into their own category:
+   - Look for recipe-related keywords in titles/content (recipe, cooking, baking, ingredients, etc.)
+   - Or use recipe-specific labels/categories if available
 
 ### Email Configuration
 
@@ -50,11 +59,13 @@ This skill collects data from Google Tasks and Google Keep, then sends a beautif
 ## Email Structure (in order)
 
 1. **Header** - "Daily Digest" title with date/time and colored accent line
-2. **Stats Section** - Card-based statistics (notes captured, tasks completed, links included)
+2. **Stats Section** - Card-based statistics (notes captured, tasks completed, links included, videos/media found)
 3. **Content Sections** - Organized by category:
    - Recently Completed Tasks (grouped by task list)
    - Current Backlog (grouped by task list)
-   - Google Keep Notes (organized by category if available)
+   - Recipes (recipe-related notes with media, if any)
+   - Google Keep Notes (organized by category if available, excluding recipes)
+   - Media Gallery (YouTube videos and other media found in notes)
 
 ## HTML/CSS Guidelines
 
