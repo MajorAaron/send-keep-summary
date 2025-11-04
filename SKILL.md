@@ -1,7 +1,7 @@
 ---
 name: send-keep-summary
 description: Generates and sends a formatted HTML email summary containing Google Tasks (completed tasks from last 7 days and current backlog) and Google Keep notes with bold brutalist design. Use this skill when the user wants to send their weekly task summary or productivity digest via email.
-allowed-tools: mcp__google-tasks__list_task_lists, mcp__google-tasks__list_tasks, mcp__keep-mcp__find, mcp__resend__send-email, AskUserQuestion
+allowed-tools: mcp__google-tasks__list_task_lists, mcp__google-tasks__list_tasks, mcp__keep-mcp__find, mcp__resend__send-email, AskUserQuestion, Read
 ---
 
 # Send Keep Summary Skill
@@ -26,10 +26,12 @@ This skill collects data from Google Tasks and Google Keep, then sends a beautif
 
 1. Use `mcp__keep-mcp__find` to retrieve all notes
 
-### Send Email
+### Email Configuration
 
-1. Use `mcp__resend__send-email` to send the formatted HTML email
-2. Ask user for sender email (`from`) and recipient email (`to`) if not already known
+1. Read email settings from `config.json` in this skill directory
+   - The config file contains: `from`, `to`, and `subject` fields
+   - Use these values for sending the email
+2. Use `mcp__resend__send-email` to send the formatted HTML email with config values
 
 ## Email Structure (in order)
 
@@ -105,11 +107,11 @@ This skill collects data from Google Tasks and Google Keep, then sends a beautif
 
 ## Implementation Steps
 
-1. Collect all Google Tasks data (completed in last 7 days + incomplete backlog)
-2. Collect all Google Keep notes
-3. Generate HTML email with brutalist design
-4. Ask user for sender and recipient email addresses
-5. Send email using Resend MCP
+1. Read email configuration from `config.json` in this skill directory
+2. Collect all Google Tasks data (completed in last 7 days + incomplete backlog)
+3. Collect all Google Keep notes
+4. Generate HTML email with brutalist design
+5. Send email using Resend MCP with config values (from, to, subject)
 
 ## Required MCP Servers
 
